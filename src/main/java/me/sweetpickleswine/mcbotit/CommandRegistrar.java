@@ -4,6 +4,10 @@ package me.sweetpickleswine.mcbotit;
 
 import me.sweetpickleswine.mcbotit.commands.*;
 import me.sweetpickleswine.mcbotit.commands.baritoneCommands.*;
+import me.sweetpickleswine.mcbotit.commands.chatCommands.clearRegisteredCommands;
+import me.sweetpickleswine.mcbotit.commands.chatCommands.listRegisteredCommands;
+import me.sweetpickleswine.mcbotit.commands.chatCommands.registerCommand;
+import me.sweetpickleswine.mcbotit.commands.chatCommands.removeCommand;
 import me.sweetpickleswine.mcbotit.commands.directInput.*;
 import me.sweetpickleswine.mcbotit.commands.info.*;
 import me.sweetpickleswine.mcbotit.commands.inventory.*;
@@ -16,6 +20,14 @@ public class CommandRegistrar {
     Map<String, BaseCommand> commandMap = new HashMap<>();
     CommandRegistrar(){
         commandMap.put("get system time", new getSystemTime());
+        commandMap.put("register game command", new registerCommand());
+        commandMap.put("get registered game commands", new listRegisteredCommands());
+        commandMap.put("remove registered game command", new removeCommand());
+        commandMap.put("clear registered game commands", new clearRegisteredCommands());
+        commandMap.put("print to chat", new printToPlayerChat());
+
+
+
         commandMap.put("get player info", new getPlayerInfo());
         commandMap.put("realistic rot", new realisticRotate());
         commandMap.put("get rotation to get to block", new getRotationOfBlock());
@@ -39,7 +51,7 @@ public class CommandRegistrar {
         commandMap.put("get villager trade info", new GetVillagerTrades());
 
 
-
+        commandMap.put("close current screen", new closeCurrentScreen());
         commandMap.put("get player inventory", new getPlayerInventory());
         commandMap.put("get open inventory", new getOpenInventory());
         commandMap.put("swap slots", new swapSlots());

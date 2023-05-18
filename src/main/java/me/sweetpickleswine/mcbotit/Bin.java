@@ -1,7 +1,9 @@
 package me.sweetpickleswine.mcbotit;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Bin {
@@ -11,6 +13,10 @@ public class Bin {
     public boolean lockScreen = false;
 
     public List<Thread> workers = new ArrayList<>();
+
+    public List<String> usedClientCommands = new ArrayList<>();
+
+    public Map<String, String> commands = new HashMap<>();
 
     public void removeFinishedWorkers(){
         workers = workers.stream().filter(Thread::isAlive).collect(Collectors.toList());

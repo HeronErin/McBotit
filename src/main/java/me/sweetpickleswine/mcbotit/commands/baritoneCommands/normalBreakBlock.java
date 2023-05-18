@@ -26,7 +26,7 @@ public class normalBreakBlock extends BaseCommand {
             BlockPos pos = new BlockPos(job.getInt("x"), job.getInt("y"), job.getInt("z"));
             Optional<Rotation> rot = RotationUtils.reachable(ctx,pos);
             if (rot.isEmpty()) {
-                try {c.writeJson(new JSONObject("{'err': 'to find rot'}"));} catch (IOException e) {}
+                try {c.writeJson(new JSONObject("{'err': 'to find rot'}"));return;} catch (IOException e) {}
             }
             MovementHelper.switchToBestToolFor(ctx, ctx.world().getBlockState(pos));
             if (!ctx.isLookingAt(pos)){
@@ -67,7 +67,6 @@ public class normalBreakBlock extends BaseCommand {
                 }
             }
             Bin.instance.lockScreen=false;
-            try {c.writeJson(new JSONObject("{'success': 'finished'}"));} catch (IOException e) {}
         }));
     }
 }

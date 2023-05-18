@@ -21,7 +21,7 @@ public class Client {
             InputStream input = socket.getInputStream();
             reader = new BufferedReader(new InputStreamReader(input));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         thread = new Thread(this::onThread);
         thread.start();
@@ -32,7 +32,14 @@ public class Client {
             while (socket.isConnected()){
                 JSONObject job = readJson();
                 if (job.getString("cmd").equalsIgnoreCase("keep alive")){
-                    writeJson(new JSONObject("{'cmd': 'keep going'}"));
+                    if (Bin.instance.usedClientCommands.size()==0)
+                        writeJson(new JSONObject("{'cmd': 'keep going'}"));
+                    else{
+                        writeJson(
+                                (new JSONObject("{'cmd': 'alert'}"))
+                                        .put("usedCommand",
+                                                Bin.instance.usedClientCommands.remove(Bin.instance.usedClientCommands.size()-1)));
+                    }
                 }else{
                     BaseCommand cmd =  CommandRegistrar.instance.commandMap.get(job.getString("cmd"));
                     if (cmd != null){
@@ -57,7 +64,8 @@ public class Client {
     }
     public void writeJson(JSONObject job) throws IOException {
 
-        output.write(job.toString().getBytes());
+        output.write((job.toString()+"\n").getBytes());
+        output.flush();
     }
 
 }
