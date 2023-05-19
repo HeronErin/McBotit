@@ -1,7 +1,7 @@
 package me.sweetpickleswine.mcbotit.commands;
 
 import me.sweetpickleswine.mcbotit.Client;
-import org.json.JSONObject;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 import java.io.IOException;
 

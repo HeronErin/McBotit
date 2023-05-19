@@ -1,10 +1,11 @@
 package me.sweetpickleswine.mcbotit.commands;
 
 import me.sweetpickleswine.mcbotit.Client;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.network.packet.c2s.play.CloseHandledScreenC2SPacket;
-import org.json.JSONObject;
+
 
 public class closeCurrentScreen extends BaseCommand{
     @Override

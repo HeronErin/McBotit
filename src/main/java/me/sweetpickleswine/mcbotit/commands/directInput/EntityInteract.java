@@ -8,7 +8,7 @@ import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
-import org.json.JSONObject;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 public class EntityInteract extends BaseCommand {
     @Override

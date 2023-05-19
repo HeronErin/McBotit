@@ -1,7 +1,5 @@
 package me.sweetpickleswine.mcbotit.commands.info;
 
-import baritone.api.BaritoneAPI;
-import baritone.api.command.registry.Registry;
 import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
 import net.minecraft.client.MinecraftClient;
@@ -10,10 +8,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtList;
-
 import net.minecraft.registry.Registries;
 import net.minecraft.screen.*;
-import org.json.JSONObject;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -94,8 +91,7 @@ public class getOpenInventory extends BaseCommand {
             return "lectern";
         else if (sc instanceof Generic3x3ContainerScreenHandler)
             return "3x3";
-        else if (sc instanceof GenericContainerScreenHandler){
-            GenericContainerScreenHandler gc = (GenericContainerScreenHandler)sc;
+        else if (sc instanceof GenericContainerScreenHandler gc){
             return "chest-"+gc.getRows();
         }else
             return "other";

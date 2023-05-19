@@ -6,8 +6,7 @@ import baritone.api.utils.input.Input;
 import me.sweetpickleswine.mcbotit.Bin;
 import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
-import me.sweetpickleswine.mcbotit.commands.directInput.buttonHold;
-import org.json.JSONObject;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 public class holdForSetTime extends BaseCommand {
     @Override

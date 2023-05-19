@@ -1,9 +1,9 @@
 package me.sweetpickleswine.mcbotit.commands.baritoneCommands;
 
 import baritone.api.utils.Rotation;
-import baritone.api.utils.RotationUtils;
 import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
@@ -11,9 +11,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import org.json.JSONObject;
 
 public class hackerPlace extends BaseCommand {
     public static Vec3d getEyesPos()

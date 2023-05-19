@@ -3,7 +3,7 @@ package me.sweetpickleswine.mcbotit.commands.chatCommands;
 import me.sweetpickleswine.mcbotit.Bin;
 import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
-import org.json.JSONObject;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 public class removeCommand extends BaseCommand {
     @Override

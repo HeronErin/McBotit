@@ -5,7 +5,7 @@ import me.sweetpickleswine.mcbotit.commands.BaseCommand;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.c2s.play.SelectMerchantTradeC2SPacket;
 import net.minecraft.screen.MerchantScreenHandler;
-import org.json.JSONObject;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 public class SetVillagerTrade extends BaseCommand {
     @Override

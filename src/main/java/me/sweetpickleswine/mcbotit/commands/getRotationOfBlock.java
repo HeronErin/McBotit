@@ -3,8 +3,8 @@ package me.sweetpickleswine.mcbotit.commands;
 import baritone.api.utils.Rotation;
 import me.sweetpickleswine.mcbotit.BlockRotateUtil;
 import me.sweetpickleswine.mcbotit.Client;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 import net.minecraft.util.math.BlockPos;
-import org.json.JSONObject;
 
 import java.io.IOException;
 

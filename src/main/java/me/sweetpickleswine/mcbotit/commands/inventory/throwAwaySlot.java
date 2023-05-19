@@ -4,7 +4,7 @@ import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.screen.slot.SlotActionType;
-import org.json.JSONObject;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 public class throwAwaySlot extends BaseCommand {
     @Override

@@ -1,11 +1,10 @@
 package me.sweetpickleswine.mcbotit;
 
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
-import org.json.JSONObject;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 
 import static me.sweetpickleswine.mcbotit.ChatUtil.sendMessage;
 
@@ -45,7 +44,7 @@ public class Client {
                     if (cmd != null){
                         cmd.onExec(this, job);
                     }else{
-                        sendMessage("Mc bot it error, can't find internal command: "+ job.toString());
+                        sendMessage("Mc bot it error, can't find internal command: "+ job);
                     }
                 }
             }

@@ -27,7 +27,7 @@ public class CommandRegistrar {
         commandMap.put("print to chat", new printToPlayerChat());
 
 
-
+        commandMap.put("get block", new getBlock());
         commandMap.put("get player info", new getPlayerInfo());
         commandMap.put("realistic rot", new realisticRotate());
         commandMap.put("get rotation to get to block", new getRotationOfBlock());

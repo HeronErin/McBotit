@@ -4,9 +4,9 @@ import baritone.api.BaritoneAPI;
 import baritone.api.schematic.FillSchematic;
 import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import org.json.JSONObject;
 
 public class baritoneBreakBlock extends BaseCommand {
     @Override

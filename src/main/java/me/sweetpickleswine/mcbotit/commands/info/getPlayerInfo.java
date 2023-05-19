@@ -4,7 +4,7 @@ import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
-import org.json.JSONObject;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 import java.io.IOException;
 
@@ -16,6 +16,7 @@ public class getPlayerInfo extends BaseCommand {
         returnData.put("x", p.getX());
         returnData.put("y", p.getY());
         returnData.put("z", p.getZ());
+        returnData.put("renderDistance", MinecraftClient.getInstance().options.getClampedViewDistance());
         returnData.put("selectedHotbarSlot", p.getInventory().selectedSlot+1);
         returnData.put("pitch", p.getPitch());
         returnData.put("yaw", p.getYaw());

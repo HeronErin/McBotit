@@ -5,7 +5,7 @@ import me.sweetpickleswine.mcbotit.commands.BaseCommand;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import org.json.JSONObject;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 public class UseItem extends BaseCommand {
     @Override

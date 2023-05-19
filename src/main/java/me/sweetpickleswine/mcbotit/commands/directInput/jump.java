@@ -3,7 +3,7 @@ package me.sweetpickleswine.mcbotit.commands.directInput;
 import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
 import net.minecraft.client.MinecraftClient;
-import org.json.JSONObject;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 public class jump extends BaseCommand {
     @Override

@@ -1,10 +1,10 @@
 package me.sweetpickleswine.mcbotit.commands.directInput;
 
-import me.sweetpickleswine.mcbotit.Client;
-import me.sweetpickleswine.mcbotit.commands.BaseCommand;
-import org.json.JSONObject;
 import baritone.api.BaritoneAPI;
 import baritone.api.utils.input.Input;
+import me.sweetpickleswine.mcbotit.Client;
+import me.sweetpickleswine.mcbotit.commands.BaseCommand;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 public class buttonHold extends BaseCommand {
     @Override

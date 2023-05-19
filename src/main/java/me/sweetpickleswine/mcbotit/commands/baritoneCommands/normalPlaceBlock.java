@@ -9,6 +9,7 @@ import me.sweetpickleswine.mcbotit.Bin;
 import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
 import me.sweetpickleswine.mcbotit.commands.realisticRotate;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.hit.BlockHitResult;
@@ -16,7 +17,6 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;

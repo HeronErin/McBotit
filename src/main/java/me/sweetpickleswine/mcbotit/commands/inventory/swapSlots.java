@@ -3,7 +3,7 @@ package me.sweetpickleswine.mcbotit.commands.inventory;
 import me.sweetpickleswine.mcbotit.Bin;
 import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
-import org.json.JSONObject;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 import static me.sweetpickleswine.mcbotit.inventoryUtils.swapSlots;
 

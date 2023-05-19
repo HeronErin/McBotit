@@ -3,7 +3,7 @@ package me.sweetpickleswine.mcbotit.commands.directInput;
 import baritone.api.BaritoneAPI;
 import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
-import org.json.JSONObject;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 import static me.sweetpickleswine.mcbotit.commands.directInput.buttonHold.inp;
 
