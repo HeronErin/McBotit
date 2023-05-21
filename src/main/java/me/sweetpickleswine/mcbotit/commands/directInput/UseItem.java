@@ -11,5 +11,6 @@ public class UseItem extends BaseCommand {
     @Override
     public void onExec(Client c, JSONObject job) {
         ActionResult a = MinecraftClient.getInstance().interactionManager.interactItem(MinecraftClient.getInstance().player, Hand.MAIN_HAND);
+
     }
 }

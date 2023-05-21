@@ -31,6 +31,7 @@ public class MinecraftClientMixin {
         if (Bin.instance.lockScreen && MinecraftClient.getInstance().currentScreen == null){
             MinecraftClient.getInstance().setScreen(new ChatScreen(""));
         }
+
     }
 
 }

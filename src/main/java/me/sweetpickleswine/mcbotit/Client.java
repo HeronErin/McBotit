@@ -2,6 +2,9 @@ package me.sweetpickleswine.mcbotit;
 
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
 import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.Vec3d;
 
 import java.io.*;
 import java.net.Socket;
@@ -30,9 +33,17 @@ public class Client {
         try {
             while (socket.isConnected()){
                 JSONObject job = readJson();
+                PlayerEntity p = MinecraftClient.getInstance().player;
+                Vec3d vel = p.getVelocity();
+
                 if (job.getString("cmd").equalsIgnoreCase("keep alive")){
                     if (Bin.instance.usedClientCommands.size()==0)
-                        writeJson(new JSONObject("{'cmd': 'keep going'}"));
+                        writeJson(
+                                (new JSONObject("{'cmd': 'keep going'}"))
+                                        .put("x", p.getX()).put("y", p.getY()).put("z", p.getZ())
+                                        .put("pitch", p.getPitch()).put("yaw", p.getYaw())
+                                        .put("velx", vel.x).put("vely", vel.y).put("velz", vel.z)
+                        );
                     else{
                         writeJson(
                                 (new JSONObject("{'cmd': 'alert'}"))

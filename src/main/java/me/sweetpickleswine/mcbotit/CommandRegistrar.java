@@ -29,6 +29,7 @@ public class CommandRegistrar {
 
         commandMap.put("get block", new getBlock());
         commandMap.put("get player info", new getPlayerInfo());
+        commandMap.put("set hotbar slot", new setHotbarSlot());
         commandMap.put("realistic rot", new realisticRotate());
         commandMap.put("get rotation to get to block", new getRotationOfBlock());
         commandMap.put("hold button", new buttonHold());
@@ -36,6 +37,7 @@ public class CommandRegistrar {
         commandMap.put("release all buttons", new releaseButtons());
         commandMap.put("release button", new buttonRelease());
         commandMap.put("jump", new jump());
+        commandMap.put("start fall flying", new startFallFlying());
         commandMap.put("use item", new UseItem());
         commandMap.put("right click block", new rightClickBlock());
         commandMap.put("baritone goto normal", new baritoneGoto());
