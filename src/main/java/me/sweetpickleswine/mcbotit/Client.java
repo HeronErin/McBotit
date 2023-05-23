@@ -43,7 +43,6 @@ public class Client {
                                         .put("x", p.getX()).put("y", p.getY()).put("z", p.getZ())
                                         .put("pitch", p.getPitch()).put("yaw", p.getYaw())
                                         .put("velx", vel.x).put("vely", vel.y).put("velz", vel.z)
-                                        .put("hunger", p.getHungerManager().getFoodLevel())
                         );
                     else{
                         writeJson(
