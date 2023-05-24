@@ -34,7 +34,18 @@ public class Client {
             while (socket.isConnected()){
                 JSONObject job = readJson();
                 PlayerEntity p = MinecraftClient.getInstance().player;
+
+
+
+
+                if (p == null){
+                    socket.close();
+                    return;
+                }
+
+
                 Vec3d vel = p.getVelocity();
+
 
                 if (job.getString("cmd").equalsIgnoreCase("keep alive")){
                     if (Bin.instance.usedClientCommands.size()==0)
@@ -43,6 +54,7 @@ public class Client {
                                         .put("x", p.getX()).put("y", p.getY()).put("z", p.getZ())
                                         .put("pitch", p.getPitch()).put("yaw", p.getYaw())
                                         .put("velx", vel.x).put("vely", vel.y).put("velz", vel.z)
+                                        .put("hunger", p.getHungerManager().getFoodLevel())
                         );
                     else{
                         writeJson(

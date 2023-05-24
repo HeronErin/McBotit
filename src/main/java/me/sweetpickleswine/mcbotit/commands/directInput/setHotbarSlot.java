@@ -11,7 +11,6 @@ public class setHotbarSlot extends BaseCommand   {
     public void onExec(Client c, JSONObject job){
         int slot = job.getInt("slot");
         MinecraftClient.getInstance().player.getInventory().selectedSlot = slot;
-        MinecraftClient.getInstance().execute(()->
-                MinecraftClient.getInstance().getNetworkHandler().sendPacket(new UpdateSelectedSlotC2SPacket(slot)));
+
     }
 }

@@ -14,6 +14,8 @@ public class Bin {
 
     public List<Thread> workers = new ArrayList<>();
 
+    public List<Runnable> tickQueue = new ArrayList<>();
+
     public List<String> usedClientCommands = new ArrayList<>();
 
     public Map<String, String> commands = new HashMap<>();

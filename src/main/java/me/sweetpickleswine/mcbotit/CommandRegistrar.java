@@ -25,6 +25,8 @@ public class CommandRegistrar {
         commandMap.put("remove registered game command", new removeCommand());
         commandMap.put("clear registered game commands", new clearRegisteredCommands());
         commandMap.put("print to chat", new printToPlayerChat());
+        commandMap.put("send public chat message", new sendPublicChatMessage());
+        commandMap.put("disconnect", new disconnect());
 
 
         commandMap.put("get block", new getBlock());
@@ -44,6 +46,7 @@ public class CommandRegistrar {
         commandMap.put("baritone goto only walk", new baritoneOnlyWalk());
         commandMap.put("normal break", new normalBreakBlock());
         commandMap.put("normal place", new normalPlaceBlock());
+        commandMap.put("printer place", new printerPlace());
         commandMap.put("baritone break", new baritoneBreakBlock());
         commandMap.put("baritone place block", new baritonePlaceBlock());
         commandMap.put("hacker place block", new hackerPlace());

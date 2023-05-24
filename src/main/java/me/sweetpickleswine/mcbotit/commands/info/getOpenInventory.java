@@ -40,6 +40,7 @@ public class getOpenInventory extends BaseCommand {
             ct.putInt("durability", is.getMaxDamage() - is.getDamage());
             ct.putInt("maxdurability", is.getMaxDamage());
             ct.putInt("id", i);
+
             list.add(ct);
         }
         ret.put("items", list);

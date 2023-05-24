@@ -17,12 +17,15 @@ import static me.sweetpickleswine.mcbotit.ChatUtil.sendMessage;
 public class MinecraftClientMixin {
     @Inject(at = @At("TAIL"), method = "joinWorld")
     public void onJoin(CallbackInfo ci){
-        int port = (new Random()).nextInt(5000, 26000);
-        sendMessage("Connected on port "+ port);
+
         if (Bin.instance.currentServer != null){
             Bin.instance.currentServer.thread.interrupt();
+        }else {
+            int port = (new Random()).nextInt(5000, 26000);
+
+            Bin.instance.currentServer = new MainServer(port);
         }
-        Bin.instance.currentServer = new MainServer(port);
+        sendMessage("Connected on port " + Bin.instance.currentServer.port);
 
 
     }
@@ -30,6 +33,9 @@ public class MinecraftClientMixin {
     public void tick(CallbackInfo ci){
         if (Bin.instance.lockScreen && MinecraftClient.getInstance().currentScreen == null){
             MinecraftClient.getInstance().setScreen(new ChatScreen(""));
+        }
+        if (Bin.instance.tickQueue.size()!=0){
+            Bin.instance.tickQueue.remove(0).run();
         }
 
     }
