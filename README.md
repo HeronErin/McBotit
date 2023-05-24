@@ -1,1 +1,2 @@
 # McBotit FabricMc client
+This is a companion mod for the main [python client](https://github.com/HeronErin/McBotItPython). This mod requires you to also download the [fabric baritone unoptimized](https://github.com/cabaletta/baritone/releases/download/v1.9.3/baritone-unoptimized-fabric-1.9.3.jar) to work. 
