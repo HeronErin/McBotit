@@ -2,7 +2,9 @@ package me.sweetpickleswine.mcbotit;
 
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
 import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
+import me.sweetpickleswine.mcbotit.mixin.DisconnectScreenAccessor;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.DisconnectedScreen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Vec3d;
 
@@ -36,7 +38,17 @@ public class Client {
                 PlayerEntity p = MinecraftClient.getInstance().player;
 
 
-
+                if(job.getString("cmd").equalsIgnoreCase("get connection state")){
+                    JSONObject out = (new JSONObject("{'cmd': 'connection state'}")).put("Connected", p != null);
+                    if (MinecraftClient.getInstance().currentScreen instanceof DisconnectedScreen){
+                        DisconnectedScreen ds = (DisconnectedScreen)MinecraftClient.getInstance().currentScreen;
+                        String reason = ((DisconnectScreenAccessor)ds).getReason().asTruncatedString(999999);
+                        out.put("reason", reason);
+                        out.put("title", ds.getTitle().asTruncatedString(999999));
+                    }
+                    writeJson(out);
+                    continue;
+                }
 
                 if (p == null){
                     socket.close();
@@ -55,6 +67,7 @@ public class Client {
                                         .put("pitch", p.getPitch()).put("yaw", p.getYaw())
                                         .put("velx", vel.x).put("vely", vel.y).put("velz", vel.z)
                                         .put("hunger", p.getHungerManager().getFoodLevel())
+                                        .put("health", p.getHealth())
                         );
                     else{
                         writeJson(
