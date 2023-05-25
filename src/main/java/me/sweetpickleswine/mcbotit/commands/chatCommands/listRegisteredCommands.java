@@ -12,7 +12,7 @@ public class listRegisteredCommands extends BaseCommand {
     @Override
     public void onExec(Client c, JSONObject job) {
         JsonArray commands = new JsonArray();
-        Bin.instance.commands.forEach((command, desc)->{
+        Bin.instance.commands.forEach((command, desc) -> {
             JSONObject outCommand = new JSONObject();
             outCommand.put("command", command);
             outCommand.put("desc", desc);

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "mcbotit",
   "version": "${version}",
 
   "name": "Example Mod",
@@ -29,10 +29,9 @@
   "depends": {
     "fabricloader": ">=0.14.19",
     "minecraft": "~1.19.4",
-    "baritone": "*",
     "java": ">=17"
   },
   "suggests": {
-    "another-mod": "*"
+    "baritone": "*"
   }
 }

@@ -2,6 +2,7 @@ package me.sweetpickleswine.mcbotit.commands.info;
 
 import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.item.ItemStack;
@@ -10,7 +11,6 @@ import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.Registries;
 import net.minecraft.screen.*;
-import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class getOpenInventory extends BaseCommand {
 
         for (int i = 0; i < sc.slots.size(); i++) {
             ItemStack is = sc.slots.get(i).getStack();
-            NbtCompound ct =  is.hasNbt() ? is.getNbt().copy() : new NbtCompound();
+            NbtCompound ct = is.hasNbt() ? is.getNbt().copy() : new NbtCompound();
 
             ct.putString("type", Registries.ITEM.getId(is.getItem()).toString());
             ct.putInt("count", is.getCount());
@@ -55,7 +55,8 @@ public class getOpenInventory extends BaseCommand {
         }
 
     }
-    public static String shtype(ScreenHandler sc){
+
+    public static String shtype(ScreenHandler sc) {
         if (sc instanceof ShulkerBoxScreenHandler)
             return "shulker";
         else if (sc instanceof CraftingScreenHandler)
@@ -92,9 +93,9 @@ public class getOpenInventory extends BaseCommand {
             return "lectern";
         else if (sc instanceof Generic3x3ContainerScreenHandler)
             return "3x3";
-        else if (sc instanceof GenericContainerScreenHandler gc){
-            return "chest-"+gc.getRows();
-        }else
+        else if (sc instanceof GenericContainerScreenHandler gc) {
+            return "chest-" + gc.getRows();
+        } else
             return "other";
     }
 }

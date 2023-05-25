@@ -1,6 +1,6 @@
 package me.sweetpickleswine.mcbotit.commands.info;
 
-import baritone.api.command.registry.Registry;
+
 import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
 import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
@@ -25,21 +25,17 @@ public class getBlock extends BaseCommand {
         NbtCompound ret = new NbtCompound();
         NbtList lt = new NbtList();
         ret.putString("id", Registries.BLOCK.getId(b.getBlock()).toString());
-        for (Object op: b.getProperties().toArray()){
-            Property p = (Property)op;
+        for (Object op : b.getProperties().toArray()) {
+            Property p = (Property) op;
             NbtCompound ct = new NbtCompound();
             String value = "undefined";
-            if (p instanceof DirectionProperty){
-                DirectionProperty prop = (DirectionProperty)p;
+            if (p instanceof DirectionProperty prop) {
                 value = b.get(prop).asString();
-            }else if (p instanceof BooleanProperty){
-                BooleanProperty prop = (BooleanProperty)p;
+            } else if (p instanceof BooleanProperty prop) {
                 value = String.valueOf(b.get(prop).booleanValue());
-            }else if (p instanceof IntProperty){
-                IntProperty prop = (IntProperty)p;
+            } else if (p instanceof IntProperty prop) {
                 value = String.valueOf(b.get(prop).intValue());
-            }else if (p instanceof EnumProperty){
-                EnumProperty prop = (EnumProperty)p;
+            } else if (p instanceof EnumProperty prop) {
                 value = String.valueOf(b.get(prop).toString());
             }
 

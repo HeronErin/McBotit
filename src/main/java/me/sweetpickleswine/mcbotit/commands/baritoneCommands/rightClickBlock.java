@@ -1,34 +1,37 @@
 package me.sweetpickleswine.mcbotit.commands.baritoneCommands;
 
-import baritone.api.BaritoneAPI;
-import baritone.api.utils.IPlayerContext;
-import baritone.api.utils.Rotation;
-import baritone.api.utils.RotationUtils;
-import baritone.api.utils.input.Input;
+
 import me.sweetpickleswine.mcbotit.Bin;
 import me.sweetpickleswine.mcbotit.Client;
+import me.sweetpickleswine.mcbotit.codeTakenFromBaritone.Input;
+import me.sweetpickleswine.mcbotit.codeTakenFromBaritone.Rotation;
+import me.sweetpickleswine.mcbotit.codeTakenFromBaritone.RotationUtils;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
 import me.sweetpickleswine.mcbotit.commands.realisticRotate;
 import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 
 import java.io.IOException;
 import java.util.Optional;
 
+import static me.sweetpickleswine.mcbotit.codeTakenFromBaritone.RayTraceUtils.isLookingAt;
+
 public class rightClickBlock extends BaseCommand {
     @Override
     public void onExec(Client c, JSONObject job) {
-        Bin.instance.registerAndStartThread(new Thread(()-> {
-            IPlayerContext ctx = BaritoneAPI.getProvider().getPrimaryBaritone().getPlayerContext();
+        Bin.instance.registerAndStartThread(new Thread(() -> {
+            ClientPlayerEntity ctx = MinecraftClient.getInstance().player;
             BlockPos pos = new BlockPos(job.getInt("x"), job.getInt("y"), job.getInt("z"));
-            Optional<Rotation> rot = RotationUtils.reachable(ctx, pos);
+            Optional<Rotation> rot = RotationUtils.reachable(ctx, pos, 4.5);
             if (rot.isEmpty()) {
                 try {
                     c.writeJson(new JSONObject("{'err': 'to find rot'}"));
                 } catch (IOException e) {
                 }
             }
-            if (!ctx.isLookingAt(pos)) {
+            if (!isLookingAt(pos)) {
                 JSONObject job_for_fake_rot_packet = new JSONObject();
                 job_for_fake_rot_packet.put("pitch", rot.get().getPitch());
                 job_for_fake_rot_packet.put("yaw", rot.get().getYaw());
@@ -43,13 +46,13 @@ public class rightClickBlock extends BaseCommand {
                 } catch (InterruptedException e) {
                 }
             }
-            BaritoneAPI.getProvider().getPrimaryBaritone().getInputOverrideHandler().setInputForceState(Input.CLICK_RIGHT, true);
+            Bin.instance.inputOverideHandler.setInputForceState(Input.CLICK_RIGHT, true);
             try {
                 Thread.sleep(150);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            BaritoneAPI.getProvider().getPrimaryBaritone().getInputOverrideHandler().setInputForceState(Input.CLICK_RIGHT, false);
+            Bin.instance.inputOverideHandler.setInputForceState(Input.CLICK_RIGHT, false);
         }));
     }
 }

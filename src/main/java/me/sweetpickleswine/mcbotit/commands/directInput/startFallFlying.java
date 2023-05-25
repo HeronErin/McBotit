@@ -14,7 +14,7 @@ import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 public class startFallFlying extends BaseCommand {
     @Override
     public void onExec(Client c, JSONObject job) {
-        MinecraftClient.getInstance().execute(()->{;
+        MinecraftClient.getInstance().execute(() -> {
             ItemStack itemStack;
             PlayerEntity p = MinecraftClient.getInstance().player;
 

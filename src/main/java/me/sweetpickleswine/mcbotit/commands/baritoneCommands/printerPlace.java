@@ -1,23 +1,21 @@
 package me.sweetpickleswine.mcbotit.commands.baritoneCommands;
 
-import baritone.api.utils.Rotation;
+
 import me.sweetpickleswine.mcbotit.Bin;
 import me.sweetpickleswine.mcbotit.Client;
+import me.sweetpickleswine.mcbotit.codeTakenFromBaritone.Rotation;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
 import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
-import net.minecraft.network.packet.c2s.play.UpdateSelectedSlotC2SPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
-import oshi.util.tuples.Pair;
 import oshi.util.tuples.Quartet;
 
 import java.util.ArrayList;
@@ -73,7 +71,8 @@ public class printerPlace extends BaseCommand {
 
         }
     }
-    public void place(int slot, Vec3d hitVec, Direction side, BlockPos pos){
+
+    public void place(int slot, Vec3d hitVec, Direction side, BlockPos pos) {
         Bin.instance.tickQueue.add(() -> {
             MinecraftClient.getInstance().player.getInventory().selectedSlot = slot;
         });

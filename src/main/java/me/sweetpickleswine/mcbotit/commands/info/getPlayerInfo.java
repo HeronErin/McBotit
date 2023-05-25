@@ -2,9 +2,9 @@ package me.sweetpickleswine.mcbotit.commands.info;
 
 import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
-import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 import java.io.IOException;
 
@@ -28,7 +28,7 @@ public class getPlayerInfo extends BaseCommand {
         returnData.put("health", p.getHealth());
 
         returnData.put("renderDistance", MinecraftClient.getInstance().options.getClampedViewDistance());
-        returnData.put("selectedHotbarSlot", p.getInventory().selectedSlot+1);
+        returnData.put("selectedHotbarSlot", p.getInventory().selectedSlot + 1);
         returnData.put("pitch", p.getPitch());
         returnData.put("yaw", p.getYaw());
         returnData.put("isElytraFlying", p.isFallFlying());

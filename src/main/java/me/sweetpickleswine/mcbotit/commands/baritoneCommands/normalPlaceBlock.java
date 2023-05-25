@@ -1,12 +1,12 @@
 package me.sweetpickleswine.mcbotit.commands.baritoneCommands;
 
-import baritone.api.BaritoneAPI;
-import baritone.api.utils.RayTraceUtils;
-import baritone.api.utils.Rotation;
-import baritone.api.utils.RotationUtils;
-import baritone.api.utils.input.Input;
+
 import me.sweetpickleswine.mcbotit.Bin;
 import me.sweetpickleswine.mcbotit.Client;
+import me.sweetpickleswine.mcbotit.codeTakenFromBaritone.Input;
+import me.sweetpickleswine.mcbotit.codeTakenFromBaritone.RayTraceUtils;
+import me.sweetpickleswine.mcbotit.codeTakenFromBaritone.Rotation;
+import me.sweetpickleswine.mcbotit.codeTakenFromBaritone.RotationUtils;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
 import me.sweetpickleswine.mcbotit.commands.realisticRotate;
 import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
@@ -42,93 +42,101 @@ public class normalPlaceBlock extends BaseCommand {
         // Calculate distance using Euclidean distance formula
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2) + Math.pow(z2 - z1, 2));
     }
+
     @Override
     public void onExec(Client c, JSONObject job) {
-        Bin.instance.registerAndStartThread(new Thread(()->{
-        BlockPos pos = new BlockPos(job.getInt("x"), job.getInt("y"), job.getInt("z"));
-        Direction userDir = null;
-        if (job.has("direction"))
-            switch (job.getString("direction")){
-                case "east" ->userDir = Direction.EAST;
-                case "west" ->userDir = Direction.WEST;
-                case "south" ->userDir = Direction.SOUTH;
-                case "north" ->userDir = Direction.NORTH;
-                case "up" ->userDir = Direction.UP;
-                case "down" ->userDir = Direction.DOWN;
-            }
+        Bin.instance.registerAndStartThread(new Thread(() -> {
+            BlockPos pos = new BlockPos(job.getInt("x"), job.getInt("y"), job.getInt("z"));
+            Direction userDir = null;
+            if (job.has("direction"))
+                switch (job.getString("direction")) {
+                    case "east" -> userDir = Direction.EAST;
+                    case "west" -> userDir = Direction.WEST;
+                    case "south" -> userDir = Direction.SOUTH;
+                    case "north" -> userDir = Direction.NORTH;
+                    case "up" -> userDir = Direction.UP;
+                    case "down" -> userDir = Direction.DOWN;
+                }
 
-        Direction d = canPlace(pos, userDir);
-        int i = 0;
-        while (d == null || (d != userDir && userDir != null)){
-            if (i > 25) break;
-            Rotation r = getPlaceable(pos, userDir);
+            Direction d = canPlace(pos, userDir);
+            int i = 0;
+            while (d == null || (d != userDir && userDir != null)) {
+                if (i > 25) break;
+                Rotation r = getPlaceable(pos, userDir);
 
-            JSONObject job_for_fake_rot_packet = new JSONObject();
-            job_for_fake_rot_packet.put("pitch", r.getPitch());
-            job_for_fake_rot_packet.put("yaw", r.getYaw());
-            job_for_fake_rot_packet.put("time_per_90", job.getFloat("time_per_90"));
+                JSONObject job_for_fake_rot_packet = new JSONObject();
+                job_for_fake_rot_packet.put("pitch", r.getPitch());
+                job_for_fake_rot_packet.put("yaw", r.getYaw());
+                job_for_fake_rot_packet.put("time_per_90", job.getFloat("time_per_90"));
 
-            (new realisticRotate()).onExec(c, job_for_fake_rot_packet);
-            try {Bin.instance.workers.get(Bin.instance.workers.size()-1).join();} catch (InterruptedException e) {}
-            i+=1;
-            d = canPlace(pos, userDir);
-            System.out.println(d);
-        }
-        if (d != null){
-            MinecraftClient.getInstance().player.getInventory().selectedSlot = job.getInt("slot");
-            try {
-                Thread.sleep(75);
-            } catch (InterruptedException e) {return;}
-
-            BaritoneAPI.getProvider().getPrimaryBaritone().getInputOverrideHandler().setInputForceState(Input.CLICK_RIGHT, true);
-            String tt = "block.minecraft.air";
-            long f = System.currentTimeMillis();
-            while (tt.equalsIgnoreCase("block.minecraft.air") && System.currentTimeMillis() - f < 2500L){
-                tt = MinecraftClient.getInstance().world.getBlockState(pos).getBlock().getTranslationKey();
+                (new realisticRotate()).onExec(c, job_for_fake_rot_packet);
                 try {
-                    Thread.sleep(25);
+                    Bin.instance.workers.get(Bin.instance.workers.size() - 1).join();
                 } catch (InterruptedException e) {
-                    BaritoneAPI.getProvider().getPrimaryBaritone().getInputOverrideHandler().setInputForceState(Input.CLICK_RIGHT, false);
+                }
+                i += 1;
+                d = canPlace(pos, userDir);
+                System.out.println(d);
+            }
+            if (d != null) {
+                MinecraftClient.getInstance().player.getInventory().selectedSlot = job.getInt("slot");
+                try {
+                    Thread.sleep(75);
+                } catch (InterruptedException e) {
                     return;
                 }
-            }
 
-            BaritoneAPI.getProvider().getPrimaryBaritone().getInputOverrideHandler().setInputForceState(Input.CLICK_RIGHT, false);
-        }
+                Bin.instance.inputOverideHandler.setInputForceState(Input.CLICK_RIGHT, true);
+                String tt = "block.minecraft.air";
+                long f = System.currentTimeMillis();
+                while (tt.equalsIgnoreCase("block.minecraft.air") && System.currentTimeMillis() - f < 2500L) {
+                    tt = MinecraftClient.getInstance().world.getBlockState(pos).getBlock().getTranslationKey();
+                    try {
+                        Thread.sleep(25);
+                    } catch (InterruptedException e) {
+                        Bin.instance.inputOverideHandler
+                                .setInputForceState(Input.CLICK_RIGHT, false);
+                        return;
+                    }
+                }
+
+                Bin.instance.inputOverideHandler.setInputForceState(Input.CLICK_RIGHT, false);
+            }
 
         }));
 
     }
-    public Rotation getPlaceable(BlockPos blockPos, Direction dir){
+
+    public Rotation getPlaceable(BlockPos blockPos, Direction dir) {
         List<BlockPos> bps = new ArrayList<>();
         PlayerEntity p = MinecraftClient.getInstance().player;
-        bps.add( new BlockPos(blockPos.getX(), blockPos.getY()+1, blockPos.getZ()) );
-        bps.add( new BlockPos(blockPos.getX(), blockPos.getY()-1, blockPos.getZ()) );
-        bps.add(  new BlockPos(blockPos.getX(), blockPos.getY(), blockPos.getZ()-1) );
-        bps.add(  new BlockPos(blockPos.getX(), blockPos.getY(), blockPos.getZ()+1) );
-        bps.add(  new BlockPos(blockPos.getX()+1, blockPos.getY(), blockPos.getZ()) );
-        bps.add( new BlockPos(blockPos.getX()-1, blockPos.getY(), blockPos.getZ()) );
-        Vec3d cp = BaritoneAPI.getProvider().getPrimaryBaritone().getPlayerContext().playerHead();
-        double brd = BaritoneAPI.getProvider().getPrimaryBaritone().getPlayerContext().playerController().getBlockReachDistance();
+        bps.add(new BlockPos(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ()));
+        bps.add(new BlockPos(blockPos.getX(), blockPos.getY() - 1, blockPos.getZ()));
+        bps.add(new BlockPos(blockPos.getX(), blockPos.getY(), blockPos.getZ() - 1));
+        bps.add(new BlockPos(blockPos.getX(), blockPos.getY(), blockPos.getZ() + 1));
+        bps.add(new BlockPos(blockPos.getX() + 1, blockPos.getY(), blockPos.getZ()));
+        bps.add(new BlockPos(blockPos.getX() - 1, blockPos.getY(), blockPos.getZ()));
+        Vec3d cp = new Vec3d(p.getPos().x, p.getPos().y + (double) p.getStandingEyeHeight(), p.getPos().z);
+        double brd = 4.5;
 
         List<Rotation> knownworks = new ArrayList<>();
         List<Thread> thrss = new ArrayList<>();
-        for (BlockPos b : bps){
-            thrss.add(new Thread(()->{
-                if (! MinecraftClient.getInstance().world.getBlockState(b).getBlock().getTranslationKey().equals("block.minecraft.air") ){
+        for (BlockPos b : bps) {
+            thrss.add(new Thread(() -> {
+                if (!MinecraftClient.getInstance().world.getBlockState(b).getBlock().getTranslationKey().equals("block.minecraft.air")) {
 //                    System.out.println(b);
                     Rotation r = RotationUtils.calcRotationFromCoords(new BlockPos((int) cp.getX(), (int) cp.getY(), (int) cp.getZ()), b);
 
-                    for(float ty = r.getYaw()-20f; ty <= r.getYaw()+20f; ty+=0.35f){
-                        for(float tp = r.getPitch()-20f; tp <= r.getPitch()+20f; tp+=0.35f){
+                    for (float ty = r.getYaw() - 20f; ty <= r.getYaw() + 20f; ty += 0.35f) {
+                        for (float tp = r.getPitch() - 20f; tp <= r.getPitch() + 20f; tp += 0.35f) {
                             Rotation trot = new Rotation(ty, tp);
 
-                            HitResult hr =  RayTraceUtils.rayTraceTowards(p, trot, brd);
+                            HitResult hr = RayTraceUtils.rayTraceTowards(p, trot, brd);
                             BlockHitResult blockHit = (BlockHitResult) hr;
 
                             if (blockHit.getBlockPos().equals(b))
                                 if (blockHit.getType() == HitResult.Type.BLOCK)
-                                    if(blockPos.equals( sideToBlock(blockHit.getSide(), b)) && (dir == null || dir == blockHit.getSide())) {
+                                    if (blockPos.equals(sideToBlock(blockHit.getSide(), b)) && (dir == null || dir == blockHit.getSide())) {
                                         knownworks.add(trot);
                                     }
                         }
@@ -136,17 +144,20 @@ public class normalPlaceBlock extends BaseCommand {
                     }
                 }
             }));
-            for(Thread t: thrss) {
+            for (Thread t : thrss) {
                 try {
                     t.start();
-                }catch (java.lang.IllegalThreadStateException ignored) {}
+                } catch (java.lang.IllegalThreadStateException ignored) {
+                }
             }
-            for(Thread t: thrss) {
+            for (Thread t : thrss) {
                 try {
                     t.join();
-                } catch (InterruptedException e) {e.printStackTrace();}
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-            if (knownworks.size()!=0) {
+            if (knownworks.size() != 0) {
                 Random random = new Random();
                 knownworks.sort((o1, o2) -> {
                     Rotation prot = new Rotation(p.getYaw(), p.getPitch());
@@ -154,16 +165,16 @@ public class normalPlaceBlock extends BaseCommand {
                     double lnn2 = angleDistance(prot, o2);
                     return Double.compare(lnn, lnn2);
                 });
-                if (knownworks.size() < 5) return  knownworks.get(knownworks.size()-1);
-                return knownworks.get(random.nextInt(0, Math.min(50, knownworks.size()) ));
+                if (knownworks.size() < 5) return knownworks.get(knownworks.size() - 1);
+                return knownworks.get(random.nextInt(0, Math.min(50, knownworks.size())));
             }
         }
 
 
-
         return null;
     }
-    public Direction canPlace(BlockPos bp, Direction dir){
+
+    public Direction canPlace(BlockPos bp, Direction dir) {
         MinecraftClient client = MinecraftClient.getInstance();
         HitResult hit = client.crosshairTarget;
         if (hit.getType() == HitResult.Type.BLOCK) {
@@ -173,8 +184,8 @@ public class normalPlaceBlock extends BaseCommand {
             BlockPos airnxt = sideToBlock(blockHit.getSide(), blockPos);
             if (airnxt == null) return null;
 
-            if(client.world.getBlockState(airnxt).getBlock().getTranslationKey().equalsIgnoreCase("block.minecraft.air") &&
-                    airnxt.equals(bp)){
+            if (client.world.getBlockState(airnxt).getBlock().getTranslationKey().equalsIgnoreCase("block.minecraft.air") &&
+                    airnxt.equals(bp)) {
 
                 if (dir == null)
                     return blockHit.getSide();
@@ -184,20 +195,21 @@ public class normalPlaceBlock extends BaseCommand {
         }
         return null;
     }
-    public BlockPos sideToBlock(Direction d, BlockPos blockPos){
-        switch (d){
+
+    public BlockPos sideToBlock(Direction d, BlockPos blockPos) {
+        switch (d) {
             case UP:
-                return new BlockPos(blockPos.getX(), blockPos.getY()+1, blockPos.getZ());
+                return new BlockPos(blockPos.getX(), blockPos.getY() + 1, blockPos.getZ());
             case DOWN:
-                return new BlockPos(blockPos.getX(), blockPos.getY()-1, blockPos.getZ());
+                return new BlockPos(blockPos.getX(), blockPos.getY() - 1, blockPos.getZ());
             case NORTH:
-                return new BlockPos(blockPos.getX(), blockPos.getY(), blockPos.getZ()-1);
+                return new BlockPos(blockPos.getX(), blockPos.getY(), blockPos.getZ() - 1);
             case SOUTH:
-                return new BlockPos(blockPos.getX(), blockPos.getY(), blockPos.getZ()+1);
+                return new BlockPos(blockPos.getX(), blockPos.getY(), blockPos.getZ() + 1);
             case EAST:
-                return new BlockPos(blockPos.getX()+1, blockPos.getY(), blockPos.getZ());
+                return new BlockPos(blockPos.getX() + 1, blockPos.getY(), blockPos.getZ());
             case WEST:
-                return new BlockPos(blockPos.getX()-1, blockPos.getY(), blockPos.getZ());
+                return new BlockPos(blockPos.getX() - 1, blockPos.getY(), blockPos.getZ());
 
             default:
                 return null;

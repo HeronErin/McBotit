@@ -10,7 +10,8 @@
     "MinecraftClientMixin",
     "onLeaveMixin",
     "ChatMixin",
-    "DisconnectScreenAccessor"
+    "DisconnectScreenAccessor",
+    "ClientPlayerInteractionManagerAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

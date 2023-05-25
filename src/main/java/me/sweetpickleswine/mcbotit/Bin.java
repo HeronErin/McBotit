@@ -1,5 +1,7 @@
 package me.sweetpickleswine.mcbotit;
 
+import me.sweetpickleswine.mcbotit.codeTakenFromBaritone.InputOverideHandler;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,8 +12,10 @@ public class Bin {
     public static Bin instance = new Bin();
     public MainServer currentServer;
 
+    public boolean hasBaritoneInstalled = false;
     public boolean lockScreen = false;
 
+    public InputOverideHandler inputOverideHandler = new InputOverideHandler();
     public List<Thread> workers = new ArrayList<>();
 
     public List<Runnable> tickQueue = new ArrayList<>();
@@ -20,10 +24,11 @@ public class Bin {
 
     public Map<String, String> commands = new HashMap<>();
 
-    public void removeFinishedWorkers(){
+    public void removeFinishedWorkers() {
         workers = workers.stream().filter(Thread::isAlive).collect(Collectors.toList());
     }
-    public void registerAndStartThread(Thread t){
+
+    public void registerAndStartThread(Thread t) {
         removeFinishedWorkers();
         t.start();
         workers.add(t);

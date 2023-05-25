@@ -29,7 +29,7 @@ dependencies {
 
 
 
-	modImplementation "baritone-unoptimized-fabric:baritone-unoptimized-fabric:1.9.3"
+	modCompileOnly "baritone-unoptimized-fabric:baritone-unoptimized-fabric:1.9.3"
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.

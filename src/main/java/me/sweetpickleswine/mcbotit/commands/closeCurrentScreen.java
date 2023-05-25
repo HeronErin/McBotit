@@ -7,10 +7,10 @@ import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.network.packet.c2s.play.CloseHandledScreenC2SPacket;
 
 
-public class closeCurrentScreen extends BaseCommand{
+public class closeCurrentScreen extends BaseCommand {
     @Override
     public void onExec(Client c, JSONObject job) {
-        MinecraftClient.getInstance().execute(()->{
+        MinecraftClient.getInstance().execute(() -> {
             int idd = MinecraftClient.getInstance().player.currentScreenHandler.syncId;
 
             MinecraftClient.getInstance().player.closeScreen();

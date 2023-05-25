@@ -2,10 +2,10 @@ package me.sweetpickleswine.mcbotit.commands.info;
 
 import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
+import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtList;
-import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

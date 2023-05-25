@@ -12,12 +12,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class onLeaveMixin {
 
     @Inject(method = "disconnect", at = @At("HEAD"))
-    public void onLeaveGameSession(CallbackInfo c){
+    public void onLeaveGameSession(CallbackInfo c) {
         Bin.instance.currentServer.kill();
 
         try {
             Bin.instance.currentServer.thread.join();
-        } catch (InterruptedException e) {throw new RuntimeException(e);}
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         Bin.instance.currentServer = null;
     }
 }

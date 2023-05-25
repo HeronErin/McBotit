@@ -1,7 +1,7 @@
 package me.sweetpickleswine.mcbotit.commands.baritoneCommands;
 
-import baritone.api.utils.Rotation;
 import me.sweetpickleswine.mcbotit.Client;
+import me.sweetpickleswine.mcbotit.codeTakenFromBaritone.Rotation;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
 import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 import net.minecraft.client.MinecraftClient;
@@ -14,16 +14,15 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 
 public class hackerPlace extends BaseCommand {
-    public static Vec3d getEyesPos()
-    {
+    public static Vec3d getEyesPos() {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
 
         return new Vec3d(player.getX(),
                 player.getY() + player.getEyeHeight(player.getPose()),
                 player.getZ());
     }
-    public static Rotation getNeededRotations(Vec3d vec)
-    {
+
+    public static Rotation getNeededRotations(Vec3d vec) {
         Vec3d eyesPos = getEyesPos();
 
         double diffX = vec.x - eyesPos.x;
@@ -32,8 +31,8 @@ public class hackerPlace extends BaseCommand {
 
         double diffXZ = Math.sqrt(diffX * diffX + diffZ * diffZ);
 
-        float yaw = (float)Math.toDegrees(Math.atan2(diffZ, diffX)) - 90F;
-        float pitch = (float)-Math.toDegrees(Math.atan2(diffY, diffXZ));
+        float yaw = (float) Math.toDegrees(Math.atan2(diffZ, diffX)) - 90F;
+        float pitch = (float) -Math.toDegrees(Math.atan2(diffY, diffXZ));
 
         return new Rotation(yaw, pitch);
     }
@@ -49,8 +48,12 @@ public class hackerPlace extends BaseCommand {
                 MinecraftClient.getInstance().player.getZ());
 
 
-        try {Thread.sleep(50);} catch (InterruptedException e) {throw new RuntimeException(e);}
-        MinecraftClient.getInstance().execute(()-> {
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        MinecraftClient.getInstance().execute(() -> {
             if (!(!MinecraftClient.getInstance().world.getBlockState(pos).getBlock().getTranslationKey().equals("block.minecraft.air") ||
                     MinecraftClient.getInstance().player.getInventory().getMainHandStack().getItem().getTranslationKey().equals("block.minecraft.air"))) {
                 for (Direction side : Direction.values()) {

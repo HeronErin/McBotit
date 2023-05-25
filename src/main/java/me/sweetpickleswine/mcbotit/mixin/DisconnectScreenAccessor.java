@@ -8,5 +8,5 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(DisconnectedScreen.class)
 public interface DisconnectScreenAccessor {
     @Accessor("reason")
-    public Text getReason();
+    Text getReason();
 }

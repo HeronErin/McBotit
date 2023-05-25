@@ -1,7 +1,6 @@
 package me.sweetpickleswine.mcbotit;
 
-import baritone.api.BaritoneAPI;
-import baritone.api.utils.IPlayerController;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.screen.slot.SlotActionType;
 

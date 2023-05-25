@@ -1,19 +1,21 @@
 package me.sweetpickleswine.mcbotit.commands.directInput;
 
-import baritone.api.BaritoneAPI;
-import baritone.api.utils.input.Input;
+
+import me.sweetpickleswine.mcbotit.Bin;
 import me.sweetpickleswine.mcbotit.Client;
+import me.sweetpickleswine.mcbotit.codeTakenFromBaritone.Input;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
 import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 
 public class buttonHold extends BaseCommand {
     @Override
     public void onExec(Client c, JSONObject job) {
-        BaritoneAPI.getProvider().getPrimaryBaritone().getInputOverrideHandler()
+        Bin.instance.inputOverideHandler
                 .setInputForceState(
                         inp(job.getString("key")), true);
     }
-    public static Input inp(String in){
+
+    public static Input inp(String in) {
         switch (in) {
             case "forward":
                 return Input.MOVE_FORWARD;

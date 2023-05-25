@@ -1,14 +1,15 @@
 package me.sweetpickleswine.mcbotit.commands;
 
-import baritone.api.utils.Rotation;
+
 import me.sweetpickleswine.mcbotit.BlockRotateUtil;
 import me.sweetpickleswine.mcbotit.Client;
+import me.sweetpickleswine.mcbotit.codeTakenFromBaritone.Rotation;
 import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 import net.minecraft.util.math.BlockPos;
 
 import java.io.IOException;
 
-public class getRotationOfBlock extends BaseCommand{
+public class getRotationOfBlock extends BaseCommand {
     @Override
     public void onExec(Client c, JSONObject job) {
         Rotation r = BlockRotateUtil.getRotationForBlock(new BlockPos(job.getInt("x"), job.getInt("y"), job.getInt("z")));

@@ -2,8 +2,8 @@ package me.sweetpickleswine.mcbotit.commands.inventory;
 
 import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
-import net.minecraft.client.MinecraftClient;
 import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
+import net.minecraft.client.MinecraftClient;
 
 public class ClickSpecialInventoryButton extends BaseCommand {
     @Override

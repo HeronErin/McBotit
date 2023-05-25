@@ -14,19 +14,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ChatMixin {
     @Inject(at = @At("HEAD"), method = "sendMessage", cancellable = true)
     private void sendMessage(String msg, boolean addToHistory, CallbackInfoReturnable info) {
-        if (msg.startsWith("$")){
+        if (msg.startsWith("$")) {
             String submsg = msg.substring(1);
-            if (submsg.equalsIgnoreCase("help")){
+            if (submsg.equalsIgnoreCase("help")) {
                 ChatUtil.sendMessage("§6McBotIt commands:");
                 ChatUtil.sendMessage("> $help: Displays this text");
-                Bin.instance.commands.forEach((key, desc)->{
-                    ChatUtil.sendMessage("> $"+key+": "+desc);
+                Bin.instance.commands.forEach((key, desc) -> {
+                    ChatUtil.sendMessage("> $" + key + ": " + desc);
                 });
 
-            }else if(Bin.instance.commands.containsKey(submsg.split(" ")[0])){
+            } else if (Bin.instance.commands.containsKey(submsg.split(" ")[0])) {
                 Bin.instance.usedClientCommands.add(submsg);
-            }
-            else{
+            } else {
                 ChatUtil.sendMessage("§4Command not found");
             }
 

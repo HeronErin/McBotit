@@ -7,7 +7,7 @@ import net.minecraft.client.gui.screen.MessageScreen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.text.Text;
 
-public class disconnect extends BaseCommand{
+public class disconnect extends BaseCommand {
     @Override
     public void onExec(Client c, JSONObject job) {
         if (MinecraftClient.getInstance().world != null) {

@@ -18,7 +18,8 @@ public class Client {
     public Thread thread;
     public BufferedReader reader;
     public OutputStream output;
-    public Client(Socket _socket){
+
+    public Client(Socket _socket) {
         socket = _socket;
         try {
             output = socket.getOutputStream();
@@ -31,18 +32,18 @@ public class Client {
         thread.start();
 
     }
-    private void onThread(){
+
+    private void onThread() {
         try {
-            while (socket.isConnected()){
+            while (socket.isConnected()) {
                 JSONObject job = readJson();
                 PlayerEntity p = MinecraftClient.getInstance().player;
 
 
-                if(job.getString("cmd").equalsIgnoreCase("get connection state")){
+                if (job.getString("cmd").equalsIgnoreCase("get connection state")) {
                     JSONObject out = (new JSONObject("{'cmd': 'connection state'}")).put("Connected", p != null);
-                    if (MinecraftClient.getInstance().currentScreen instanceof DisconnectedScreen){
-                        DisconnectedScreen ds = (DisconnectedScreen)MinecraftClient.getInstance().currentScreen;
-                        String reason = ((DisconnectScreenAccessor)ds).getReason().asTruncatedString(999999);
+                    if (MinecraftClient.getInstance().currentScreen instanceof DisconnectedScreen ds) {
+                        String reason = ((DisconnectScreenAccessor) ds).getReason().asTruncatedString(999999);
                         out.put("reason", reason);
                         out.put("title", ds.getTitle().asTruncatedString(999999));
                     }
@@ -50,7 +51,7 @@ public class Client {
                     continue;
                 }
 
-                if (p == null){
+                if (p == null) {
                     socket.close();
                     return;
                 }
@@ -59,8 +60,8 @@ public class Client {
                 Vec3d vel = p.getVelocity();
 
 
-                if (job.getString("cmd").equalsIgnoreCase("keep alive")){
-                    if (Bin.instance.usedClientCommands.size()==0)
+                if (job.getString("cmd").equalsIgnoreCase("keep alive")) {
+                    if (Bin.instance.usedClientCommands.size() == 0)
                         writeJson(
                                 (new JSONObject("{'cmd': 'keep going'}"))
                                         .put("x", p.getX()).put("y", p.getY()).put("z", p.getZ())
@@ -69,37 +70,42 @@ public class Client {
                                         .put("hunger", p.getHungerManager().getFoodLevel())
                                         .put("health", p.getHealth())
                         );
-                    else{
+                    else {
                         writeJson(
                                 (new JSONObject("{'cmd': 'alert'}"))
                                         .put("usedCommand",
-                                                Bin.instance.usedClientCommands.remove(Bin.instance.usedClientCommands.size()-1)));
+                                                Bin.instance.usedClientCommands.remove(Bin.instance.usedClientCommands.size() - 1)));
                     }
-                }else{
-                    BaseCommand cmd =  CommandRegistrar.instance.commandMap.get(job.getString("cmd"));
-                    if (cmd != null){
+                } else {
+                    BaseCommand cmd = CommandRegistrar.instance.commandMap.get(job.getString("cmd"));
+                    if (cmd != null) {
                         cmd.onExec(this, job);
-                    }else{
-                        sendMessage("Mc bot it error, can't find internal command: "+ job);
+                    } else {
+                        sendMessage("Mc bot it error, can't find internal command: " + job);
                     }
                 }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }catch (NullPointerException ignored){
+        } catch (NullPointerException ignored) {
 
-            try {socket.close();} catch (IOException ignoredd) {}
+            try {
+                socket.close();
+            } catch (IOException ignoredd) {
+            }
         }
 //        socket.getOutputStream()
     }
+
     public JSONObject readJson() throws IOException {
         return new JSONObject(reader.readLine());
 
 
     }
+
     public void writeJson(JSONObject job) throws IOException {
 
-        output.write((job.toString()+"\n").getBytes());
+        output.write((job.toString() + "\n").getBytes());
         output.flush();
     }
 
