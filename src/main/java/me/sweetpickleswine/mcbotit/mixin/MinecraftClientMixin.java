@@ -2,6 +2,7 @@ package me.sweetpickleswine.mcbotit.mixin;
 
 import me.sweetpickleswine.mcbotit.Bin;
 import me.sweetpickleswine.mcbotit.MainServer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ChatScreen;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,11 +28,20 @@ public class MinecraftClientMixin {
         }
         sendMessage("Connected on port " + Bin.instance.currentServer.port);
 
+        FabricLoader.getInstance().getAllMods().forEach((modContainer) -> {
+            if (modContainer.toString().contains("baritone")) {
+                Bin.instance.hasBaritoneInstalled = true;
+            }
+        });
+
 
     }
 
     @Inject(at = @At("HEAD"), method = "tick")
     public void tick(CallbackInfo ci) {
+
+
+
         if (Bin.instance.lockScreen && MinecraftClient.getInstance().currentScreen == null) {
             MinecraftClient.getInstance().setScreen(new ChatScreen(""));
         }

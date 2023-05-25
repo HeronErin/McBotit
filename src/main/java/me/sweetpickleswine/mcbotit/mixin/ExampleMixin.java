@@ -16,10 +16,6 @@ public class ExampleMixin {
     private void init(CallbackInfo info) {
         System.out.println("This line is printed by an example mod mixin!");
 
-        FabricLoader.getInstance().getAllMods().forEach((modContainer) -> {
-            if (modContainer.toString().contains("baritone")) {
-                Bin.instance.hasBaritoneInstalled = true;
-            }
-        });
+
     }
 }
