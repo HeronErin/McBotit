@@ -17,6 +17,8 @@ public class BaritoneHandler {
     public static void baritoneBreakBlockHandler(BlockPos bp) {
         if (Bin.instance.hasBaritoneInstalled)
             baritoneBreakBlockHandlerUnder(bp);
+        else
+            System.err.println("Attempted to call baritone function without baritone installed");
     }
     private static void baritoneGotoUnder(int x, int y, int z){
         Bin.instance.registerAndStartThread(new Thread(() -> {
@@ -37,7 +39,8 @@ public class BaritoneHandler {
     public static void baritoneGoto(int x, int y, int z){
         if (Bin.instance.hasBaritoneInstalled)
             baritoneGotoUnder(x, y, z);
-
+        else
+            System.err.println("Attempted to call baritone function without baritone installed");
     }
 
     private static void baritoneGotoWalkOnlyUnder(int x, int y, int z){
@@ -70,6 +73,8 @@ public class BaritoneHandler {
     public static void baritoneGotoWalkOnly(int x, int y, int z){
         if (Bin.instance.hasBaritoneInstalled)
             baritoneGotoWalkOnlyUnder(x, y, z);
+        else
+            System.err.println("Attempted to call baritone function without baritone installed");
 
     }
 
@@ -84,6 +89,8 @@ public class BaritoneHandler {
     public static void baritonePlaceBlock(int x, int y, int z, String id){
         if (Bin.instance.hasBaritoneInstalled)
             baritonePlaceBlockUnder(x, y, z, id);
+        else
+            System.err.println("Attempted to call baritone function without baritone installed");
 
     }
 }
