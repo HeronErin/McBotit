@@ -11,7 +11,9 @@
     "onLeaveMixin",
     "ChatMixin",
     "DisconnectScreenAccessor",
-    "ClientPlayerInteractionManagerAccessor"
+    "ClientPlayerInteractionManagerAccessor",
+    "BeaconScreenAccesor",
+    "AnvilScreenAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,4 +1,4 @@
-package me.sweetpickleswine.mcbotit.commands.directInput;
+package me.sweetpickleswine.mcbotit.commands.inventory;
 
 import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;

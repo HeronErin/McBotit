@@ -3,16 +3,10 @@ package me.sweetpickleswine.mcbotit;
 
 import me.sweetpickleswine.mcbotit.commands.*;
 import me.sweetpickleswine.mcbotit.commands.baritoneCommands.*;
-import me.sweetpickleswine.mcbotit.commands.chatCommands.clearRegisteredCommands;
-import me.sweetpickleswine.mcbotit.commands.chatCommands.listRegisteredCommands;
-import me.sweetpickleswine.mcbotit.commands.chatCommands.registerCommand;
-import me.sweetpickleswine.mcbotit.commands.chatCommands.removeCommand;
+import me.sweetpickleswine.mcbotit.commands.chatCommands.*;
 import me.sweetpickleswine.mcbotit.commands.directInput.*;
 import me.sweetpickleswine.mcbotit.commands.info.*;
-import me.sweetpickleswine.mcbotit.commands.inventory.ClickSpecialInventoryButton;
-import me.sweetpickleswine.mcbotit.commands.inventory.SetVillagerTrade;
-import me.sweetpickleswine.mcbotit.commands.inventory.swapSlots;
-import me.sweetpickleswine.mcbotit.commands.inventory.throwAwaySlot;
+import me.sweetpickleswine.mcbotit.commands.inventory.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +26,7 @@ public class CommandRegistrar {
         commandMap.put("disconnect", new disconnect());
 
 
+        commandMap.put("set beacon input", new beaconInput());
         commandMap.put("get block", new getBlock());
         commandMap.put("get player info", new getPlayerInfo());
         commandMap.put("set hotbar slot", new setHotbarSlot());
@@ -42,6 +37,7 @@ public class CommandRegistrar {
         commandMap.put("release all buttons", new releaseButtons());
         commandMap.put("release button", new buttonRelease());
         commandMap.put("jump", new jump());
+        commandMap.put("wake up", new wakeUp());
         commandMap.put("start fall flying", new startFallFlying());
         commandMap.put("use item", new UseItem());
         commandMap.put("right click block", new rightClickBlock());
@@ -57,6 +53,9 @@ public class CommandRegistrar {
         commandMap.put("wait for workers", new waitForWorkers());
         commandMap.put("interact with entity", new EntityInteract());
         commandMap.put("get villager trade info", new GetVillagerTrades());
+        commandMap.put("get enchantment info", new getEnchants());
+        commandMap.put("change or set anvil name", new anvilName());
+
 
 
         commandMap.put("is baritone installed", new isBaritoneInstalled());
