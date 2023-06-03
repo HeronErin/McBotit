@@ -18,7 +18,7 @@ import java.io.IOException;
 public class getOpenInventory extends BaseCommand {
     @Override
     public void onExec(Client c, JSONObject job) {
-        DataOutputStream dout = new DataOutputStream(c.output);
+
         NbtCompound ret = new NbtCompound();
         NbtList list = new NbtList();
         ScreenHandler sc = MinecraftClient.getInstance().player.currentScreenHandler;
@@ -46,10 +46,8 @@ public class getOpenInventory extends BaseCommand {
         ret.put("items", list);
 
         try {
-            System.out.println(ret);
-            NbtIo.write(ret, dout);
-            GetVillagerTrades.endNbt(dout);
-            dout.flush();
+//            System.out.println(ret);
+            c.writeNbt(ret);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

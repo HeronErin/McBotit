@@ -14,11 +14,10 @@ public class GetVillagerTrades extends BaseCommand {
     public void onExec(Client c, JSONObject job) {
 
         MerchantScreenHandler ms = (MerchantScreenHandler) MinecraftClient.getInstance().player.currentScreenHandler;
-        DataOutputStream dout = new DataOutputStream(c.output);
+
         try {
-            ms.getRecipes().toNbt().write(dout);
-            endNbt(dout);
-            dout.flush();
+            c.writeNbt(ms.getRecipes().toNbt());
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -28,11 +27,5 @@ public class GetVillagerTrades extends BaseCommand {
 
     }
 
-    public static void endNbt(DataOutputStream dout) throws IOException {
-        dout.writeUTF("This is the ending text of the nbt stream1234567899876543210");
-        dout.writeByte(0);
-        dout.writeByte(0);
-        dout.writeByte(0);
-        dout.writeByte(0);
-    }
+
 }

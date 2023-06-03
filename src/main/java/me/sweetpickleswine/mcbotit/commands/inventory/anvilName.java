@@ -4,11 +4,8 @@ import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
 import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
 import me.sweetpickleswine.mcbotit.mixin.AnvilScreenAccessor;
-
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.ingame.AnvilScreen;
 import net.minecraft.screen.AnvilScreenHandler;
-import net.minecraft.screen.EnchantmentScreenHandler;
 
 import java.io.IOException;
 

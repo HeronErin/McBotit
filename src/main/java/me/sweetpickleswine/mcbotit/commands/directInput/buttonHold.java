@@ -25,7 +25,7 @@ public class buttonHold extends BaseCommand {
                 return Input.MOVE_RIGHT;
             case "back":
                 return Input.MOVE_BACK;
-            case "bu":
+            case "left click":
                 return Input.CLICK_LEFT;
             case "right click":
                 return Input.CLICK_RIGHT;

@@ -3,7 +3,10 @@ package me.sweetpickleswine.mcbotit;
 
 import me.sweetpickleswine.mcbotit.commands.*;
 import me.sweetpickleswine.mcbotit.commands.baritoneCommands.*;
-import me.sweetpickleswine.mcbotit.commands.chatCommands.*;
+import me.sweetpickleswine.mcbotit.commands.chatCommands.clearRegisteredCommands;
+import me.sweetpickleswine.mcbotit.commands.chatCommands.listRegisteredCommands;
+import me.sweetpickleswine.mcbotit.commands.chatCommands.registerCommand;
+import me.sweetpickleswine.mcbotit.commands.chatCommands.removeCommand;
 import me.sweetpickleswine.mcbotit.commands.directInput.*;
 import me.sweetpickleswine.mcbotit.commands.info.*;
 import me.sweetpickleswine.mcbotit.commands.inventory.*;

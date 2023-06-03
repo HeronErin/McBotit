@@ -75,6 +75,7 @@ public class printerPlace extends BaseCommand {
     public void place(int slot, Vec3d hitVec, Direction side, BlockPos pos) {
         Bin.instance.tickQueue.add(() -> {
             MinecraftClient.getInstance().player.getInventory().selectedSlot = slot;
+
         });
         Bin.instance.tickQueue.add(() -> {
             PlayerEntity player = MinecraftClient.getInstance().player;

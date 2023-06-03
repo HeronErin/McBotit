@@ -2,8 +2,6 @@ package me.sweetpickleswine.mcbotit.mixin;
 
 //import net.fabricmc.example.ExampleMod;
 
-import me.sweetpickleswine.mcbotit.Bin;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screen.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

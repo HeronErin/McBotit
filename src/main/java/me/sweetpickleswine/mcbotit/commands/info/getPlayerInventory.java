@@ -14,11 +14,10 @@ public class getPlayerInventory extends BaseCommand {
     @Override
     public void onExec(Client c, JSONObject job) {
         NbtList nbt = MinecraftClient.getInstance().player.getInventory().writeNbt(new NbtList());
-        DataOutputStream dout = new DataOutputStream(c.output);
+
         try {
-            NbtIo.write(nbt, dout);
-            GetVillagerTrades.endNbt(dout);
-            dout.flush();
+            c.writeNbt(nbt);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

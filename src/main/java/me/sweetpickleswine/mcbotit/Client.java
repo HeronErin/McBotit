@@ -6,6 +6,9 @@ import me.sweetpickleswine.mcbotit.mixin.DisconnectScreenAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DisconnectedScreen;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtIo;
 import net.minecraft.util.math.Vec3d;
 
 import java.io.*;
@@ -104,9 +107,29 @@ public class Client {
     }
 
     public void writeJson(JSONObject job) throws IOException {
-
         output.write((job.toString() + "\n").getBytes());
         output.flush();
+    }
+
+    public void writeNbt(NbtElement nbt) throws IOException {
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        DataOutputStream dout = new DataOutputStream(baos);
+        NbtIo.write(nbt, dout);
+
+
+        dout.writeUTF("This is the ending text of the nbt stream1234567899876543210");
+        dout.writeByte(0);
+        dout.writeByte(0);
+        dout.writeByte(0);
+        dout.writeByte(0);
+
+        dout.flush();
+        baos.flush();
+
+        output.write(baos.toByteArray());
+        output.flush();
+//        System.out.println(baos.toByteArray().length);
     }
 
 }

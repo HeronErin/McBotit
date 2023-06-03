@@ -46,11 +46,8 @@ public class getBlock extends BaseCommand {
         }
 
         ret.put("properties", lt);
-        DataOutputStream dout = new DataOutputStream(c.output);
         try {
-            NbtIo.write(ret, dout);
-            GetVillagerTrades.endNbt(dout);
-            dout.flush();
+            c.writeNbt(ret);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
