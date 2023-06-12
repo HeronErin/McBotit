@@ -80,8 +80,8 @@ public class printerPlace extends BaseCommand {
         Bin.instance.tickQueue.add(() -> {
             PlayerEntity player = MinecraftClient.getInstance().player;
             Rotation neededRot = hackerPlace.getNeededRotations(hitVec);
-            player.setPitch(neededRot.getPitch());
-            player.setYaw(neededRot.getYaw());
+//            player.setPitch(neededRot.getPitch());
+//            player.setYaw(neededRot.getYaw());
             PlayerMoveC2SPacket packet = new PlayerMoveC2SPacket.Full(player.getX(), player.getY(), player.getZ(), neededRot.getYaw(), neededRot.getPitch(), player.isOnGround());
 
             MinecraftClient.getInstance().getNetworkHandler().sendPacket(packet);
