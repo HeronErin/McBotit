@@ -95,8 +95,8 @@ public final class RotationUtils {
         if (possibleRotation.isPresent()) {
             return possibleRotation;
         } else {
-            BlockState state = entity.world.getBlockState(pos);
-            VoxelShape shape = state.getOutlineShape(entity.world, pos);
+            BlockState state = entity.getWorld().getBlockState(pos);
+            VoxelShape shape = state.getOutlineShape(entity.getWorld(), pos);
             if (shape.isEmpty()) {
                 shape = VoxelShapes.fullCube();
             }
@@ -128,7 +128,7 @@ public final class RotationUtils {
                 return Optional.of(rotation);
             }
 
-            if (entity.world.getBlockState(pos).getBlock() instanceof AbstractFireBlock && ((BlockHitResult) result).getBlockPos().equals(pos.down())) {
+            if (entity.getWorld().getBlockState(pos).getBlock() instanceof AbstractFireBlock && ((BlockHitResult) result).getBlockPos().equals(pos.down())) {
                 return Optional.of(rotation);
             }
         }
@@ -137,7 +137,7 @@ public final class RotationUtils {
     }
 
     public static Optional<Rotation> reachableCenter(Entity entity, BlockPos pos, double blockReachDistance, boolean wouldSneak) {
-        return reachableOffset(entity, pos, calculateBlockCenter(entity.world, pos), blockReachDistance, wouldSneak);
+        return reachableOffset(entity, pos, calculateBlockCenter(entity.getWorld(), pos), blockReachDistance, wouldSneak);
     }
 
     public static Vec3d calculateBlockCenter(World world, BlockPos pos) {
