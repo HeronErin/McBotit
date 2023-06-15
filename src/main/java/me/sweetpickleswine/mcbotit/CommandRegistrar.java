@@ -66,7 +66,11 @@ public class CommandRegistrar {
         commandMap.put("close current screen", new closeCurrentScreen());
         commandMap.put("get player inventory", new getPlayerInventory());
         commandMap.put("get open inventory", new getOpenInventory());
+
         commandMap.put("swap slots", new swapSlots());
+        commandMap.put("drop item", new dropStack());
+        commandMap.put("click stack", new clickStack());
+
         commandMap.put("set villager trade", new SetVillagerTrade());
         commandMap.put("throwout slot", new throwAwaySlot());
         commandMap.put("click special inventory button", new ClickSpecialInventoryButton());
