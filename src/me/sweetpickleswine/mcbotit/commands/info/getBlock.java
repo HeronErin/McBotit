@@ -46,21 +46,12 @@ public class getBlock extends BaseCommand {
 
 
             int i = 0;
-            for (Text text : blockEntity.getFrontText().getMessages(false) ) {
+            for (Text text : blockEntity.getText(false).getMessages(false)) {
                 jarr.add(text.getString());
                 i++;
             }
 
             ret.putString("sign json", jarr.toString());
-            jarr = new JsonArray();
-
-            i = 0;
-            for (Text text : blockEntity.getBackText().getMessages(false) ) {
-                jarr.add(text.getString());
-                i++;
-            }
-
-            ret.putString("sign json back", jarr.toString());
         }
 
         for (Object op : b.getProperties().toArray()) {
