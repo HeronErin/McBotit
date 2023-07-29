@@ -6,14 +6,15 @@
   "mixins": [
   ],
   "client": [
+    "AnvilScreenAccessor",
+    "BeaconScreenAccesor",
+    "ChatMixin",
+    "ClientPlayerInteractionManagerAccessor",
+    "DisconnectScreenAccessor",
     "ExampleMixin",
     "MinecraftClientMixin",
     "onLeaveMixin",
-    "ChatMixin",
-    "DisconnectScreenAccessor",
-    "ClientPlayerInteractionManagerAccessor",
-    "BeaconScreenAccesor",
-    "AnvilScreenAccessor"
+    "RecipeBookWidgetAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

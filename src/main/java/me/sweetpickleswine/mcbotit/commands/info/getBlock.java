@@ -1,16 +1,27 @@
 package me.sweetpickleswine.mcbotit.commands.info;
 
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import me.sweetpickleswine.mcbotit.Client;
 import me.sweetpickleswine.mcbotit.commands.BaseCommand;
 import me.sweetpickleswine.mcbotit.jsonFix.JSONObject;
+import net.minecraft.block.AbstractSignBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.SignBlock;
+import net.minecraft.block.WallSignBlock;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.Registries;
 import net.minecraft.state.property.*;
+import net.minecraft.text.ClickEvent;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 
 import java.io.DataOutputStream;
@@ -22,9 +33,27 @@ public class getBlock extends BaseCommand {
         BlockPos bp = new BlockPos(job.getInt("x"), job.getInt("y"), job.getInt("z"));
         BlockState b = MinecraftClient.getInstance().world.getBlockState(bp);
 
+
+
         NbtCompound ret = new NbtCompound();
         NbtList lt = new NbtList();
         ret.putString("id", Registries.BLOCK.getId(b.getBlock()).toString());
+
+        if (b.getBlock() instanceof AbstractSignBlock){
+            JsonArray jarr = new JsonArray();
+            SignBlockEntity blockEntity = (SignBlockEntity) MinecraftClient.getInstance().world.getBlockEntity(bp);
+
+
+
+            int i = 0;
+            for (Text text : blockEntity.method_49843(false).method_49877(false)) {
+                jarr.add(text.getString());
+                i++;
+            }
+
+            ret.putString("sign json", jarr.toString());
+        }
+
         for (Object op : b.getProperties().toArray()) {
             Property p = (Property) op;
             NbtCompound ct = new NbtCompound();

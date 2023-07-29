@@ -31,6 +31,7 @@ public class CommandRegistrar {
 
         commandMap.put("set beacon input", new beaconInput());
         commandMap.put("get block", new getBlock());
+        commandMap.put("get chunk", new chunckDump());
         commandMap.put("get player info", new getPlayerInfo());
         commandMap.put("set hotbar slot", new setHotbarSlot());
         commandMap.put("realistic rot", new realisticRotate());
@@ -51,7 +52,10 @@ public class CommandRegistrar {
         commandMap.put("printer place", new printerPlace());
         commandMap.put("baritone break", new baritoneBreakBlock());
         commandMap.put("baritone place block", new baritonePlaceBlock());
-        commandMap.put("hacker place block", new hackerPlace());
+//        commandMap.put("hacker place block", new hackerPlace());                       /// Just a worse printer place
+
+
+        commandMap.put("hacker open block", new hackerOpenBlock());
 
         commandMap.put("wait for workers", new waitForWorkers());
         commandMap.put("interact with entity", new EntityInteract());
@@ -68,8 +72,10 @@ public class CommandRegistrar {
         commandMap.put("get open inventory", new getOpenInventory());
 
         commandMap.put("swap slots", new swapSlots());
+        commandMap.put("shift click", new shiftClick());
         commandMap.put("drop item", new dropStack());
         commandMap.put("click stack", new clickStack());
+        commandMap.put("quick craft", new quickCraft());
 
         commandMap.put("set villager trade", new SetVillagerTrade());
         commandMap.put("throwout slot", new throwAwaySlot());
