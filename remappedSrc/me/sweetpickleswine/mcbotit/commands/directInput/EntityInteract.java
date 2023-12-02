@@ -21,6 +21,6 @@ public class EntityInteract extends BaseCommand {
             } else {
                 MinecraftClient.getInstance().getNetworkHandler().sendPacket(PlayerInteractEntityC2SPacket.attack(e, MinecraftClient.getInstance().player.isSneaking()));
             }
-        }""
+        }
     }
 }

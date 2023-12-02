@@ -9,7 +9,6 @@ import net.minecraft.client.gui.screen.ingame.CraftingScreen;
 import net.minecraft.client.gui.screen.recipebook.RecipeGroupButtonWidget;
 import net.minecraft.client.gui.screen.recipebook.RecipeResultCollection;
 import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.registry.Registries;
 
@@ -20,8 +19,8 @@ public class quickCraft extends BaseCommand {
             int id = MinecraftClient.getInstance().player.currentScreenHandler.syncId;
 
             for (RecipeResultCollection resultCollection : MinecraftClient.getInstance().player.getRecipeBook().getOrderedResults() ){
-                for (RecipeEntry<?> recipe : resultCollection.getAllRecipes()){
-                    if (recipe.id().toString().equalsIgnoreCase(job.getString("id"))){
+                for (Recipe<?> recipe : resultCollection.getAllRecipes()){
+                    if (recipe.getId().toString().equalsIgnoreCase(job.getString("id"))){
 
                         MinecraftClient.getInstance().interactionManager.clickRecipe(id, recipe, job.job.get("full stack").getAsBoolean());
 

@@ -3,7 +3,7 @@
   "id": "mcbotit",
   "version": "${version}",
 
-  "name": "Example Mod",
+  "name": "McBotIt",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
     "Me!"
@@ -28,7 +28,7 @@
 
   "depends": {
     "fabricloader": ">=0.14.19",
-    "minecraft": "~1.20.1",
+    "minecraft": "~1.20.2",
     "java": ">=17"
   },
   "suggests": {
